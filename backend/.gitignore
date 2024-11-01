@@ -2,7 +2,7 @@
 venv
 .env
 # .gitignore for Django Projects
-
+token.txt
 # Python-specific
 *.pyc
 *.pyo
