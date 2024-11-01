@@ -1,0 +1,1 @@
+curl -v --data 'grant_type=client_credentials&client_id=team029&client_secret=Mdmwlg9um3Y3W8qT4HYBHh5TaHD2CrIu' https://auth.bankingapi.ru/auth/realms/kubernetes/protocol/openid-connect/token
