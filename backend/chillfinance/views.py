@@ -41,7 +41,7 @@ class RegistrationAPIView(APIView):
             samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
         )
         response.data = {
-            'access': str(refresh.access_token),
+            'access_token': str(refresh.access_token),
 
         }
         response.status = status.HTTP_200_OK
@@ -88,7 +88,7 @@ class LoginAPIView(APIView):
 
         })
         response.data = {
-            'access': str(refresh.access_token),
+            'access_token': str(refresh.access_token),
 
         }
         response.status = status.HTTP_200_OK
@@ -127,17 +127,17 @@ class RefreshTokenView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         refresh = RefreshToken(refresh_token)
-        data = {"access": str(refresh.access_token)}
+        data = {"access_token": str(refresh.access_token)}
 
         # if api_settings.ROTATE_REFRESH_TOKENS:
         #     if api_settings.BLACKLIST_AFTER_ROTATION:
-        try:
-            # Attempt to blacklist the given refresh token
-            refresh.blacklist()
-        except AttributeError:
-            # If blacklist app not installed, `blacklist` method will
-            # not be present
-            pass
+        # try:
+        #     # Attempt to blacklist the given refresh token
+        #     refresh.blacklist()
+        # except AttributeError:
+        #     # If blacklist app not installed, `blacklist` method will
+        #     # not be present
+        #     pass
 
         refresh.set_jti()
         refresh.set_exp()
@@ -153,7 +153,7 @@ class RefreshTokenView(APIView):
             samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
         )
         response.data = {
-            'access': str(refresh.access_token),
+            'access_token': str(refresh.access_token),
 
         }
         response.status = status.HTTP_200_OK

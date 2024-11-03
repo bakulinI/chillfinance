@@ -62,9 +62,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'chillfinance',
-        'USER': 'chillfinance_user',
-        'PASSWORD':'chillfinance_password',
-        'PORT': 3306
+        'USER': 'root',
+        'PASSWORD':'',
+        'PORT': 3306,
+        
     }
 }
 
