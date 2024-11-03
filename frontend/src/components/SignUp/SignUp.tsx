@@ -1,28 +1,52 @@
 import { Button, Flex, Form, Input, Typography } from 'antd';
 import { FC } from 'react';
+import { SubmitHandler } from 'react-hook-form';
+import { FormItem } from 'react-hook-form-antd';
 import { useNavigate } from 'react-router-dom';
+import { SignUpFormSchema } from './constants';
+import { useSignUpForm } from './hooks';
+import { useSignUpMutation } from './hooks/useSignUpMutation';
 const { Title, Link } = Typography;
 export const SignUp: FC = () => {
   const navigate = useNavigate();
-
+  const { handleSubmit, control } = useSignUpForm();
+  const { mutate, isLoading } = useSignUpMutation();
+  const submitHanlder: SubmitHandler<SignUpFormSchema> = (data) => {
+    mutate(data, {
+      onSuccess() {
+        navigate('/');
+      },
+    });
+  };
   return (
-    <section className="h-screen bg-auth bg-cover bg-center">
-      <div className="my-container h-full pt-24">
-        <Form className="bg-white px-8 pt-8 rounded-3xl pb-11 mb-8 shadow-[0px_4px_4px_0px_#00000040]">
+    <section>
+      <div className="my-container pt-24">
+        <Form
+          onFinish={handleSubmit(submitHanlder)}
+          className="bg-white px-8 pt-8 rounded-3xl pb-11 mb-8 shadow-[0px_4px_4px_0px_#00000040]"
+        >
           <Title className="font-bold text-center" level={3}>
             Регистрация
           </Title>
-          <Form.Item label="Имя пользователя" className="[&_.ant-form-item-label]:pb-0">
+          <FormItem
+            control={control}
+            name="username"
+            label="Имя пользователя"
+            className="[&_.ant-form-item-label]:pb-0"
+          >
             <Input placeholder="Заполните это поле" className="border border-input" />
-          </Form.Item>
-          <Form.Item label="Электронная почта" className="[&_.ant-form-item-label]:pb-0">
+          </FormItem>
+
+          <FormItem control={control} name="email" label="Электронная почта" className="[&_.ant-form-item-label]:pb-0">
             <Input placeholder="Заполните это поле" className="border border-input" />
-          </Form.Item>
-          <Form.Item label="Пароль" className="[&_.ant-form-item-label]:pb-0">
+          </FormItem>
+
+          <FormItem control={control} name="password" label="Пароль" className="[&_.ant-form-item-label]:pb-0">
             <Input.Password placeholder="Заполните это поле" className="border border-input" />
-          </Form.Item>
+          </FormItem>
+
           <Form.Item wrapperCol={{ span: 1, offset: 4 }}>
-            <Button type="primary" htmlType="submit">
+            <Button loading={isLoading} type="primary" htmlType="submit">
               Зарегистрироваться
             </Button>
           </Form.Item>
