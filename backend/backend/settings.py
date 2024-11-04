@@ -58,16 +58,53 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_LOGIN = os.getenv('DB_LOGIN')
+MODE = os.getenv("MODE")
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'chillfinance',
-        'USER': 'root',
-        'PASSWORD':'',
         'PORT': 3306,
-        
     }
 }
+
+if MODE == "DEV":
+     DATABASES['default'].update({
+        'NAME': 'chillfinance',
+        'USER': 'root',
+        'PASSWORD': '',
+    })
+  
+else:
+     DATABASES['default'].update({
+        'HOST': 'std-mysql',
+        'NAME': 'std_2109_chillfinance',
+        'USER': DB_PASSWORD,
+        'PASSWORD': DB_LOGIN,
+    })
+
+   # DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'chillfinance',
+    #     'USER': 'root',
+    #     'PASSWORD':'',
+    #     'PORT': 3306,
+        
+    # },
+    #  'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'HOST':'std-mysql',
+    #     'NAME': 'std_2109_chillfinance',
+    #     'USER': 'std_2109_chillfinance',
+    #     'PASSWORD':'std_2109_chillfinance',
+    #     'PORT': 3306,
+        
+    # }
+    
+    # }
 
 
 # Password validation
