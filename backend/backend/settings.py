@@ -79,8 +79,8 @@ if MODE == "DEV":
   
 else:
      DATABASES['default'].update({
-        'HOST': 'std-mysql',
-        'NAME': 'std_2109_chillfinance',
+        'HOST': 'slaver1410.mysql.pythonanywhere-services.com',
+        'NAME': 'slaver1410$chillfinance',
         'USER': DB_PASSWORD,
         'PASSWORD': DB_LOGIN,
     })
