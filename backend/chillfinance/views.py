@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_simplejwt.exceptions import TokenError
-
+from rest_framework.permissions import AllowAny
 from .models import CustomUser
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializer import CustomUserSerializer, UserListSerializer, GetTokenSerializer
@@ -21,7 +21,7 @@ def home(request):
 
 
 class RegistrationAPIView(APIView):
-    permission_classes = []
+    permission_classes = [AllowAny]
     def post(self, request):
         user = CustomUser.objects.create_user(username=request.data['username'], email=request.data['email'], password=request.data['password'])
         user.save()
@@ -59,12 +59,12 @@ class LoginAPIView(APIView):
 
         if username is None or password is None:
 
-            return Response({'error': 'Нужно имя полльзователя  и пароль'},
+            return Response({'error': 'Нужно имя пользователя  и пароль'},
 
                             status=status.HTTP_400_BAD_REQUEST)
 
         user = authenticate(username=username,password=password)
-        print(user)
+      
         if user is None:
 
             return Response({'error': 'Неверные данные'},
@@ -120,9 +120,9 @@ class RefreshTokenView(APIView):
     permission_classes = []
     def get(self, request, format=None):
         response = Response()
-
+        print(request.COOKIES)
         refresh_token = request.COOKIES.get(settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'])
-        print(refresh_token)
+        
         if refresh_token is None:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 

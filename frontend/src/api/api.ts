@@ -1,8 +1,8 @@
 import { AccesTokenResponse, SignInParams, SignUpParams } from '@/types';
 import axios from 'axios';
 
-const apiUrl = 'http://localhost:8000/api/';
-// const apiUrl = import.meta.env.VITE_API 
+// const apiUrl = 'http://localhost:8000/api/';
+const apiUrl = import.meta.env.VITE_API 
 export const api = axios.create({
   baseURL: apiUrl,
   withCredentials: true,
