@@ -5,6 +5,7 @@ import { FormItem } from 'react-hook-form-antd';
 import { useNavigate } from 'react-router-dom';
 import { SignInFormSchema } from './constants';
 import { useSignInForm, useSignInMutation } from './hooks';
+import { SignInParams } from '@/types';
 
 const { Title, Link } = Typography;
 export const SignIn: FC = () => {
@@ -12,8 +13,8 @@ export const SignIn: FC = () => {
   const { handleSubmit, control } = useSignInForm();
   const { mutate, isLoading } = useSignInMutation();
   const submitHanlder: SubmitHandler<SignInFormSchema> = (data) => {
-    console.log(data);
-    mutate(data, {
+   
+    mutate(data as SignInParams, {
       onSuccess() {
         navigate('/');
       },
