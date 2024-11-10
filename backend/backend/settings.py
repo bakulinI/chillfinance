@@ -142,6 +142,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:9000",
     "https://chillfinance.vercel.app",
+    "https://chillfinance.tech",
 ]
 
 REST_FRAMEWORK = {
@@ -162,7 +163,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
 
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,

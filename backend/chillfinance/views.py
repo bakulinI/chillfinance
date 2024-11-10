@@ -68,14 +68,18 @@ class RegistrationAPIView(APIView):
                 'username': user.username,
                 'email': user.email
         })
+    
         response.set_cookie(
-            key=settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'],
-            value=str(refresh),
-            expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
-            secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
-            httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
-            samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
-        )
+    key=settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'],
+    value=str(refresh),
+    expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
+    max_age=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds(), 
+
+    secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+    httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+    samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
+    domain="chillfinance.tech"  
+    )
         response.data = {
             'access_token': str(refresh.access_token),
 
@@ -137,7 +141,19 @@ class LoginAPIView(APIView):
             httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
             samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
         )
-      
+
+        response.set_cookie(
+    key=settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'],
+    value=str(refresh),
+    expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
+    max_age=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds(), 
+
+    secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+    httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+    samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
+    domain="chillfinance.tech"  
+    )
+        
         refresh.payload.update({
             'user_id': user.id,
             'username': user.username,
@@ -213,14 +229,18 @@ class RefreshTokenView(APIView):
         refresh.set_iat()
 
         data["refresh"] = str(refresh)
+      
         response.set_cookie(
-            key=settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'],
-            value=data["refresh"],
-            expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
-            secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
-            httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
-            samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
-        )
+    key=settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'],
+    value=data["refresh"],
+    expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
+    max_age=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds(), 
+
+    secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+    httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+    samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
+    domain="chillfinance.tech"  
+    )
         response.data = {
             'access_token': str(refresh.access_token),
 
