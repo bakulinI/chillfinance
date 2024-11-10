@@ -84,8 +84,8 @@ else:
      DATABASES['default'].update({
         'HOST': 'slaver1410.mysql.pythonanywhere-services.com',
         'NAME': 'slaver1410$chillfinance',
-        'USER': DB_PASSWORD,
-        'PASSWORD': DB_LOGIN,
+        'USER': DB_LOGIN,
+        'PASSWORD': DB_PASSWORD,
     })
 
  

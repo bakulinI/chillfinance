@@ -25,7 +25,7 @@ def home(request):
 
 
 class RegistrationAPIView(APIView):
-    permission_classes = []
+    permission_classes = [AllowAny]
     @swagger_auto_schema(
         operation_description="Регистрация пользователя. Устанавливает cookie httpOnly с refresh токеном.",
         responses={ 200: openapi.Schema(
@@ -87,7 +87,7 @@ class RegistrationAPIView(APIView):
     
 
 class LoginAPIView(APIView):
-    permission_classes = []
+    permission_classes = [AllowAny]
     serializer_class = GetTokenSerializer
     @swagger_auto_schema(
         operation_description="Авторизация пользователя. Устанавливает cookie httpOnly с refresh токеном.",
@@ -152,7 +152,7 @@ class LoginAPIView(APIView):
         return response
 
 class LogoutAPIView(APIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     @swagger_auto_schema(
         operation_description="Выход из аккаунта. Для выхода необходимо, чтобы в Cookie был refresh_token",
         responses={ 200: "Logged out and blacklisted token", 
