@@ -5,6 +5,7 @@ import { FC } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import RequiredAuth from './components/shared/RequiredAuth/RequiredAuth';
 import { HomePage, SignInPage, SignUpPage } from './pages';
+import { CategoryPage } from './pages/Category';
 import LayoutPage from './pages/Layout';
 
 const queryClient = new QueryClient({
@@ -14,7 +15,7 @@ const queryClient = new QueryClient({
     },
   },
 });
-
+console.log(import.meta.env);
 const router = createBrowserRouter([
   {
     path: '/',
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUpPage />,
+      },
+      {
+        path: '/category',
+        element: <CategoryPage />,
       },
       {
         path: '/signin',
