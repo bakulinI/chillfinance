@@ -25,7 +25,10 @@ INSTALLED_APPS = [
 'rest_framework_simplejwt',
 'rest_framework_simplejwt.token_blacklist',
 'rest_framework',
+'drf_yasg', 
+ 'drf_spectacular',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -85,26 +88,7 @@ else:
         'PASSWORD': DB_LOGIN,
     })
 
-   # DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'chillfinance',
-    #     'USER': 'root',
-    #     'PASSWORD':'',
-    #     'PORT': 3306,
-        
-    # },
-    #  'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'HOST':'std-mysql',
-    #     'NAME': 'std_2109_chillfinance',
-    #     'USER': 'std_2109_chillfinance',
-    #     'PASSWORD':'std_2109_chillfinance',
-    #     'PORT': 3306,
-        
-    # }
-    
-    # }
+ 
 
 
 # Password validation
@@ -157,6 +141,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://sub.example.com",
     "http://localhost:5173",
     "http://127.0.0.1:9000",
+    "https://chillfinance.vercel.app",
 ]
 
 REST_FRAMEWORK = {
@@ -216,3 +201,12 @@ AUTHENTICATION_BACKENDS = (
 CORS_ALLOW_CREDENTIALS = True
 
 
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
+}
