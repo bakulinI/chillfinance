@@ -1,8 +1,6 @@
-import { api } from '@/api';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Card, Empty, Flex, Modal, Typography } from 'antd';
-import { FC, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC, useState } from 'react';
 import { AddedBankCards } from '../AddedBankCards';
 import BankCards from '../BankCards/BankCards';
 import { useGetBanks } from './hooks/useGetBanks';
@@ -24,14 +22,6 @@ export const Profile: FC = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const navigate = useNavigate();
-  useEffect(() => {
-    const getData = async () => {
-      const response = await api.get('/users/');
-      console.log(response.data);
-    };
-    getData();
-  }, []);
 
   const { data, isLoading } = useGetBanks();
   console.log(data);

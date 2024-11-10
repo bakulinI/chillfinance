@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
     },
   },
 });
-console.log(import.meta.env);
+
 const router = createBrowserRouter([
   {
     path: '/',
