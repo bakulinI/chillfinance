@@ -1,3 +1,4 @@
+import { SignInParams } from '@/types';
 import { Button, Flex, Form, Input, Typography } from 'antd';
 import { FC } from 'react';
 import { SubmitHandler } from 'react-hook-form';
@@ -5,7 +6,6 @@ import { FormItem } from 'react-hook-form-antd';
 import { useNavigate } from 'react-router-dom';
 import { SignInFormSchema } from './constants';
 import { useSignInForm, useSignInMutation } from './hooks';
-import { SignInParams } from '@/types';
 
 const { Title, Link } = Typography;
 export const SignIn: FC = () => {
@@ -13,10 +13,9 @@ export const SignIn: FC = () => {
   const { handleSubmit, control } = useSignInForm();
   const { mutate, isLoading } = useSignInMutation();
   const submitHanlder: SubmitHandler<SignInFormSchema> = (data) => {
-   
     mutate(data as SignInParams, {
       onSuccess() {
-        navigate('/');
+        navigate('/category');
       },
     });
   };

@@ -52,4 +52,29 @@ class AuthApi {
     return api.post('logout/');
   }
 }
+
+interface Category {
+  id: number;
+  name: string;
+}
+
+interface Entertainment {
+  id: number;
+  title: string;
+  description: string;
+  categories: Category[];
+}
+
+class Api {
+  async getBanks() {
+    return api.get('banks/');
+  }
+  async getCategories() {
+    return api.get<Category[]>('categories/');
+  }
+  async getEntertainment() {
+    return api.get<Entertainment[]>('entertainment/');
+  }
+}
+export const API = new Api();
 export const authApi = new AuthApi();

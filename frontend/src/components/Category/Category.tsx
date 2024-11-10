@@ -1,6 +1,7 @@
-import { Button, Flex, Tag, Typography } from 'antd';
+import { Button, Flex, Skeleton, Tag, Typography } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useGetCategory } from './hooks';
 
 const tagsData = ['Кино', 'Выставки', 'Рестораны', 'Путешествия'];
 
@@ -14,24 +15,40 @@ export const Category: React.FC = () => {
     setSelectedTags(nextSelectedTags);
   };
   const navigate = useNavigate();
+  const { isLoading, data } = useGetCategory();
   return (
     <div className="my-container pt-4">
-      <Title className="text-white text-center">Выберите категории:</Title>
-      <Flex justify="space-between" align="center">
-        {tagsData.map<React.ReactNode>((tag) => (
-          <Tag.CheckableTag
-            className="text-sm"
-            key={tag}
-            checked={selectedTags.includes(tag)}
-            onChange={(checked) => handleChange(tag, checked)}
+      {isLoading ? (
+        <Flex className="bg-white p-4 rounded-lg">
+          <Skeleton />
+        </Flex>
+      ) : (
+        <>
+          <Title className="text-white text-center">Выберите категории:</Title>
+          <Flex vertical gap={10} className="mb-6" justify="center" align="center">
+            {data &&
+              data.map<React.ReactNode>((tag) => (
+                <Tag.CheckableTag
+                  className="text-xl"
+                  key={tag.id}
+                  checked={selectedTags.includes(tag.name)}
+                  onChange={(checked) => handleChange(tag.name, checked)}
+                >
+                  {tag.name}
+                </Tag.CheckableTag>
+              ))}
+          </Flex>
+          <Button
+            className="block mx-auto"
+            size="large"
+            onClick={() => navigate('/profile')}
+            color="default"
+            variant="outlined"
           >
-            {tag}
-          </Tag.CheckableTag>
-        ))}
-      </Flex>
-      <Button onClick={() => navigate('/')} color="default" variant="outlined">
-        К выбору банков
-      </Button>
+            К выбору банков
+          </Button>
+        </>
+      )}
     </div>
   );
 };

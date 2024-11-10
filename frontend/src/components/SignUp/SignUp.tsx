@@ -1,3 +1,4 @@
+import { SignUpParams } from '@/types';
 import { Button, Flex, Form, Input, Typography } from 'antd';
 import { FC } from 'react';
 import { SubmitHandler } from 'react-hook-form';
@@ -6,21 +7,17 @@ import { useNavigate } from 'react-router-dom';
 import { SignUpFormSchema } from './constants';
 import { useSignUpForm } from './hooks';
 import { useSignUpMutation } from './hooks/useSignUpMutation';
-import { SignUpParams } from '@/types';
 const { Title, Link } = Typography;
 export const SignUp: FC = () => {
   const navigate = useNavigate();
   const { handleSubmit, control } = useSignUpForm();
   const { mutate, isLoading } = useSignUpMutation();
   const submitHanlder: SubmitHandler<SignUpFormSchema> = (data) => {
-    
-      mutate(data as SignUpParams, {
-        onSuccess() {
-          navigate('/');
-        },
-      });
-    
-  
+    mutate(data as SignUpParams, {
+      onSuccess() {
+        navigate('/profile');
+      },
+    });
   };
   return (
     <section>
