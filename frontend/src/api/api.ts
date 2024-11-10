@@ -2,14 +2,14 @@ import { AccesTokenResponse, SignInParams, SignUpParams } from '@/types';
 import axios from 'axios';
 
 // const apiUrl = 'http://localhost:8000/api/';
-const apiUrl = import.meta.env.VITE_API 
+const apiUrl = import.meta.env.VITE_API;
 export const api = axios.create({
   baseURL: apiUrl,
   withCredentials: true,
 });
 
 api.interceptors.request.use((config) => {
-  const token = JSON.parse(localStorage.getItem('token'))
+  const token = JSON.parse(localStorage.getItem('token'));
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -37,15 +37,11 @@ api.interceptors.response.use(
 
 class AuthApi {
   async signIn(data: SignInParams) {
-    return axios.post<AccesTokenResponse>(`${apiUrl}signin/`, data,{
-      withCredentials:true
-    });
+    return api.post<AccesTokenResponse>(`${apiUrl}signin/`, data);
   }
 
   async signUp(data: SignUpParams) {
-    return axios.post<AccesTokenResponse>(`${apiUrl}signup/`, data,{
-      withCredentials:true
-    });
+    return api.post<AccesTokenResponse>(`${apiUrl}signup/`, data);
   }
 
   async refreshToken() {
