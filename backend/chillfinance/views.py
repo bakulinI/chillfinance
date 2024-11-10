@@ -10,9 +10,10 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework.permissions import AllowAny
-from .models import CustomUser
+from .models import CustomUser, Bank, Entertainment, Balance, Category, BankAccount
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializer import CustomUserSerializer, UserListSerializer, GetTokenSerializer
+from .serializer import CustomUserSerializer, UserListSerializer, GetTokenSerializer, BankSerializer, \
+    EntertainmentSerializer, BalanceSerializer, CategorySerializer, BankAccountSerializer
 from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample,extend_schema_view
 from drf_spectacular.types import OpenApiTypes
 from drf_yasg.utils import swagger_auto_schema
@@ -235,3 +236,23 @@ class UserViewSet(ModelViewSet):
     queryset = CustomUser.objects.all()
     permission_classes = [IsAuthenticated]
     serializer_class = UserListSerializer
+class BankAccountViewSet(ModelViewSet):
+    queryset = BankAccount.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = BankAccountSerializer
+class BankViewSet(ModelViewSet):
+    queryset = Bank.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = BankSerializer
+class EntertainmentViewSet(ModelViewSet):
+    queryset = Entertainment.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = EntertainmentSerializer
+class BalanceViewSet(ModelViewSet):
+    queryset = Balance.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = BalanceSerializer
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = CategorySerializer

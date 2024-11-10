@@ -1,0 +1,52 @@
+[
+    {
+        "model": "chillfinance.entertainment",
+        "pk": 1,
+        "fields": {
+            "title": "Квест в реальности",
+            "description": "Уникальный квест, где вам предстоит разгадывать головоломки и искать подсказки.",
+            "price": "1500.00",
+            "categories": [1]
+        }
+    },
+    {
+        "model": "chillfinance.entertainment",
+        "pk": 2,
+        "fields": {
+            "title": "Путешествие по Европе",
+            "description": "Экскурсионное путешествие по самым известным европейским городам.",
+            "price": "20000.00",
+            "categories": [2]
+        }
+    },
+    {
+        "model": "chillfinance.entertainment",
+        "pk": 3,
+        "fields": {
+            "title": "Просмотр нового фильма",
+            "description": "Насладитесь просмотром самых ожидаемых новинок кино.",
+            "price": "500.00",
+            "categories": [3]
+        }
+    },
+    {
+        "model": "chillfinance.entertainment",
+        "pk": 4,
+        "fields": {
+            "title": "Концерт любимой группы",
+            "description": "Приятное времяпрепровождение на живом концерте вашей любимой группы.",
+            "price": "3000.00",
+            "categories": [4]
+        }
+    },
+    {
+        "model": "chillfinance.entertainment",
+        "pk": 5,
+        "fields": {
+            "title": "Гастрономическое путешествие",
+            "description": "Попробуйте лучшие блюда национальных кухонь в разных частях мира.",
+            "price": "3500.00",
+            "categories": [5]
+        }
+    }
+]

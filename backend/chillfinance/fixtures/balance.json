@@ -1,0 +1,42 @@
+[
+  {
+    "model": "chillfinance.balance",
+    "pk": 1,
+    "fields": {
+      "user_bank_account": 1,
+      "balance": "1000.50"
+    }
+  },
+  {
+    "model": "chillfinance.balance",
+    "pk": 2,
+    "fields": {
+      "user_bank_account": 2,
+      "balance": "500.00"
+    }
+  },
+  {
+    "model": "chillfinance.balance",
+    "pk": 3,
+    "fields": {
+      "user_bank_account": 3,
+      "balance": "3500.75"
+    }
+  },
+  {
+    "model": "chillfinance.balance",
+    "pk": 4,
+    "fields": {
+      "user_bank_account": 4,
+      "balance": "200.25"
+    }
+  },
+  {
+    "model": "chillfinance.balance",
+    "pk": 5,
+    "fields": {
+      "user_bank_account": 5,
+      "balance": "750.10"
+    }
+  }
+]

@@ -1,0 +1,52 @@
+[
+    {
+        "model": "chillfinance.bankaccount",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "bank": 1,
+            "is_auth": true,
+            "account_number": "1234567890"
+        }
+    },
+    {
+        "model": "chillfinance.bankaccount",
+        "pk": 2,
+        "fields": {
+            "user": 1,
+            "bank": 2,
+            "is_auth": false,
+            "account_number": "0987654321"
+        }
+    },
+    {
+        "model": "chillfinance.bankaccount",
+        "pk": 3,
+        "fields": {
+            "user": 1,
+            "bank": 3,
+            "is_auth": true,
+            "account_number": "1122334455"
+        }
+    },
+    {
+        "model": "chillfinance.bankaccount",
+        "pk": 4,
+        "fields": {
+            "user": 1,
+            "bank": 4,
+            "is_auth": false,
+            "account_number": "5566778899"
+        }
+    },
+    {
+        "model": "chillfinance.bankaccount",
+        "pk": 5,
+        "fields": {
+            "user": 1,
+            "bank": 5,
+            "is_auth": true,
+            "account_number": "2233445566"
+        }
+    }
+]

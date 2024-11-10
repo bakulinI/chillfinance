@@ -6,6 +6,11 @@ from chillfinance.views import UserViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'banks', BankViewSet)
+router.register(r'entertainment', EntertainmentViewSet)
+router.register(r'categories', CategoryViewSet)
+router.register(r'bankaccounts', BankAccountViewSet)
+router.register(r'balance', BalanceViewSet)
 urlpatterns = [
 path('api/signin/', LoginAPIView.as_view(), name='signin'),
 path('api/signup/', RegistrationAPIView.as_view(), name='signup'),

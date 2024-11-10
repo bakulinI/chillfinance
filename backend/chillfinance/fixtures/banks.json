@@ -1,0 +1,42 @@
+[
+    {
+        "model": "chillfinance.bank",
+        "pk": 1,
+        "fields": {
+            "name": "Sberbank",
+            "image_url": "https://msk.kprf.ru/wp-content/uploads/2022/07/logo-sber.png"
+        }
+    },
+    {
+        "model": "chillfinance.bank",
+        "pk": 2,
+        "fields": {
+            "name": "VTB",
+            "image_url": "https://narfu.ru/upload/iblock/faf/IVQAu2aiN69nK8aCwso3eQ.jpg"
+        }
+    },
+    {
+        "model": "chillfinance.bank",
+        "pk": 3,
+        "fields": {
+            "name": "Tinkoff",
+            "image_url": "https://bashinkom-v-dom.ru/images/editor/pngwingcom-1.png"
+        }
+    },
+    {
+        "model": "chillfinance.bank",
+        "pk": 4,
+        "fields": {
+            "name": "Raiffeisen",
+            "image_url": "https://www.anti-malware.ru/files/images/source/raiffaizenbank_ibm_security_soar_news.png"
+        }
+    },
+    {
+        "model": "chillfinance.bank",
+        "pk": 5,
+        "fields": {
+            "name": "Alfa-Bank",
+            "image_url": "https://irecommend.ru/sites/default/files/product-images/1455326/plOs0jUvtMlxRB1g4byOw.jpg"
+        }
+    }
+]

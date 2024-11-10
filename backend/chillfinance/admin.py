@@ -7,3 +7,21 @@ class RoleAdmin(admin.ModelAdmin):
 @admin.register(CustomUser)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username',)
+
+@admin.register(Bank)
+class UserAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Entertainment)
+class UserAdmin(admin.ModelAdmin):
+    pass
+@admin.register(BankAccount)
+class UserAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Balance)
+class UserAdmin(admin.ModelAdmin):
+    pass
+@admin.register(Category)
+class UserAdmin(admin.ModelAdmin):
+    pass

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from chillfinance.models import CustomUser
+from chillfinance.models import CustomUser, Bank, BankAccount, Balance, Entertainment, Category
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -33,3 +33,36 @@ class UserListSerializer(serializers.ModelSerializer):
             "password",
             "email",
         ]
+class BankSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bank
+        fields = ['id', 'name', 'image_url']
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name']
+
+
+class EntertainmentSerializer(serializers.ModelSerializer):
+    categories = CategorySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Entertainment
+        fields = ['id', 'title', 'description', 'categories']
+
+
+class BankAccountSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
+    bank = serializers.StringRelatedField()
+
+    class Meta:
+        model = BankAccount
+        fields = ['id', 'user', 'bank', 'is_auth', 'account_number']
+
+
+class BalanceSerializer(serializers.ModelSerializer):
+    user_bank_account = BankAccountSerializer(read_only=True)
+
+    class Meta:
+        model = Balance
+        fields = ['id', 'user_bank_account', 'balance']
