@@ -142,6 +142,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:9000",
     "https://chillfinance.vercel.app",
+    "https://chillfinance.tech",
 ]
 
 REST_FRAMEWORK = {

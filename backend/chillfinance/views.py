@@ -58,31 +58,36 @@ class RegistrationAPIView(APIView):
 
         try:
             user = CustomUser.objects.create_user(username=username, email=email, password=password)
-        except ValidationError as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
-        user.save()
-        response = Response()
-        refresh = RefreshToken.for_user(user) 
-        refresh.payload.update({    
+            user.save()
+            response = Response()
+            refresh = RefreshToken.for_user(user) 
+            refresh.payload.update({    
                 'user_id': user.id,
                 'username': user.username,
                 'email': user.email
-        })
-        response.set_cookie(
-            key=settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'],
-            value=str(refresh),
-            expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
-            secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
-            httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
-            samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
-        )
-        response.data = {
+            })
+    
+            response.set_cookie(
+    key=settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'],
+    value=str(refresh),
+    expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
+    max_age=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds(), 
+
+    secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+    httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+    samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
+
+    )
+            response.data = {
             'access_token': str(refresh.access_token),
 
-        }
-        response.status = status.HTTP_200_OK
-        return response
+            }
+            response.status = status.HTTP_200_OK
+            return response
+        except ValidationError as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+        
 
     
     
@@ -131,14 +136,17 @@ class LoginAPIView(APIView):
 
         refresh = RefreshToken.for_user(user)
         response.set_cookie(
-            key=settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'],
-            value=str(refresh),
-            expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
-            secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
-            httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
-            samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
-        )
-      
+    key=settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'],
+    value=str(refresh),
+    expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
+    max_age=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds(), 
+
+    secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+    httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+    samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
+   
+    )
+        
         refresh.payload.update({
             'user_id': user.id,
             'username': user.username,
@@ -214,14 +222,18 @@ class RefreshTokenView(APIView):
         refresh.set_iat()
 
         data["refresh"] = str(refresh)
+      
         response.set_cookie(
-            key=settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'],
-            value=data["refresh"],
-            expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
-            secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
-            httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
-            samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
-        )
+    key=settings.SIMPLE_JWT['REFRESH_TOKEN_COOKIE_NAME'],
+    value=data["refresh"],
+    expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
+    max_age=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds(), 
+
+    secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+    httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+    samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
+   
+    )
         response.data = {
             'access_token': str(refresh.access_token),
 
