@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ConfigProvider, message } from 'antd';
 import { FC } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import RequiredAuth from './components/shared/RequiredAuth/RequiredAuth';
 import { HomePage, SignInPage, SignUpPage } from './pages';
 import { CategoryPage } from './pages/Category';
 import LayoutPage from './pages/Layout';
@@ -36,10 +37,9 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: (
-          <ProfilePage />
-          // <RequiredAuth>
-          //   <ProfilePage />
-          // </RequiredAuth>
+          <RequiredAuth>
+            <ProfilePage />
+          </RequiredAuth>
         ),
       },
       {
