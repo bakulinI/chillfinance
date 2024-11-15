@@ -24,7 +24,6 @@ export const Profile: FC = () => {
   };
 
   const { data, isLoading } = useGetBanks();
-  console.log(data);
 
   return (
     <div className="my-container">
@@ -62,15 +61,20 @@ export const Profile: FC = () => {
       )}
       <Modal
         loading={isLoading}
-        title="Выбор Банков"
+        title={'Выбор Банков'}
         cancelText="Закрыть"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        okButtonProps={{ style: { display: 'none' } }}
       >
-        <Flex vertical gap={10}>
-          {data && data.map((el) => <BankCards {...el} />)}
-        </Flex>
+        {data?.length > 0 ? (
+          <Flex vertical gap={10}>
+            {data && data.map((el) => <BankCards {...el} />)}
+          </Flex>
+        ) : (
+          <Empty className="bg-white rounded-md p-4" description="no data"></Empty>
+        )}
       </Modal>
     </div>
   );

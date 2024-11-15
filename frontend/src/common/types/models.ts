@@ -15,5 +15,5 @@ export interface User {
   username: string;
   role: string | null;
   email: string;
-  categories: Category[];
+  categories: Category['name'][];
 }

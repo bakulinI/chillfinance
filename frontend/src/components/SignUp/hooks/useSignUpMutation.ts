@@ -1,13 +1,15 @@
 import { authApi } from '@/api';
 import { useAuth, useLocalStorage } from '@/common';
+import { OutletContext } from '@/pages';
 import { useMutation } from '@tanstack/react-query';
 import { message } from 'antd';
 import { AxiosError } from 'axios';
+import { useOutletContext } from 'react-router-dom';
 
 export const useSignUpMutation = () => {
   const { setItem } = useLocalStorage();
   const { setAuth } = useAuth();
-  const [messageApi, contextHolder] = message.useMessage();
+  const { messageApi } = useOutletContext<OutletContext>();
   return useMutation({
     mutationFn: authApi.signUp,
     onError: (error: AxiosError<Record<string, string | string[]>>) => {

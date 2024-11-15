@@ -1,6 +1,7 @@
+import { context } from '@/context';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { Button, Card, Flex, Image, Modal, Tag, Typography } from 'antd';
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { useGetEntertainment } from './hooks';
 const { Meta } = Card;
 
@@ -20,7 +21,7 @@ const colors = ['green', 'red', 'volcano'];
 const { Text } = Typography;
 export const AddedBankCards: FC<Props> = ({ name, image_url }) => {
   const { isLoading, data } = useGetEntertainment();
-  console.log(data);
+  const { user } = useContext(context);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -73,20 +74,22 @@ export const AddedBankCards: FC<Props> = ({ name, image_url }) => {
       >
         <Flex vertical gap={10}>
           {data &&
-            data.map((el) => (
-              <Card style={{ width: '100%' }}>
-                <Flex vertical gap={10}>
-                  <Meta title={el.title} description={el.description} className="mb-3" />
-                  <Text className="bg-blue-500 text-white p-2 rounded-xl">{randomInteger(2000, 20000)} руб</Text>
-                </Flex>
-                <Text className="mb-2">Категории:</Text>
-                <Flex gap={10}>
-                  {el.categories.map((cat) => (
-                    <Tag color={colors[randomInteger(0, 2)]}>{cat.name}</Tag>
-                  ))}
-                </Flex>
-              </Card>
-            ))}
+            data
+              .filter((el) => user.categories.includes(el.categories[0].name))
+              .map((el) => (
+                <Card style={{ width: '100%' }}>
+                  <Flex vertical gap={10}>
+                    <Meta title={el.title} description={el.description} className="mb-3" />
+                    <Text className="bg-blue-500 text-white p-2 rounded-xl">{randomInteger(2000, 20000)} руб</Text>
+                  </Flex>
+                  <Text className="mb-2">Категории:</Text>
+                  <Flex gap={10}>
+                    {el.categories.map((cat) => (
+                      <Tag color={colors[randomInteger(0, 2)]}>{cat.name}</Tag>
+                    ))}
+                  </Flex>
+                </Card>
+              ))}
           {/* {data && data.map((el) => <BankCards {...el} />)} */}
         </Flex>
       </Modal>

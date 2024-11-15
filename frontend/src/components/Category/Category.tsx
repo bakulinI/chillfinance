@@ -1,6 +1,7 @@
+import { OutletContext } from '@/pages';
 import { Button, Flex, Skeleton, Tag, Typography } from 'antd';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { useGetCategory, useMutateCategory } from './hooks';
 
 const tagsData = ['Кино', 'Выставки', 'Рестораны', 'Путешествия'];
@@ -8,6 +9,7 @@ const tagsData = ['Кино', 'Выставки', 'Рестораны', 'Пут�
 const { Title, Link } = Typography;
 
 export const Category: React.FC = () => {
+  const { messageApi } = useOutletContext<OutletContext>();
   const [selectedTags, setSelectedTags] = useState<number[]>([]);
   const handleChange = (tagId: number, checked: boolean) => {
     const nextSelectedTags = checked ? [...selectedTags, tagId] : selectedTags.filter((t) => t !== tagId);
@@ -15,7 +17,18 @@ export const Category: React.FC = () => {
   };
   const navigate = useNavigate();
   const { isLoading, data } = useGetCategory();
-  const { mutate } = useMutateCategory();
+  const { mutate, isLoading: isLoadingUpdate } = useMutateCategory();
+  const handleClick = () => {
+    mutate(
+      { data: selectedTags },
+      {
+        onSuccess() {
+          navigate('/profile');
+          messageApi.success('Сохранили ваш выбор!');
+        },
+      },
+    );
+  };
   return (
     <div className="my-container pt-4">
       {isLoading ? (
@@ -42,8 +55,9 @@ export const Category: React.FC = () => {
             <Button
               className="block mx-auto"
               size="large"
-              onClick={() => navigate('/profile')}
+              onClick={handleClick}
               color="default"
+              loading={isLoadingUpdate}
               variant="outlined"
             >
               К выбору банков

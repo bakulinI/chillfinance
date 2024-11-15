@@ -1,6 +1,6 @@
 import { ContextProvider } from '@/context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ConfigProvider, message } from 'antd';
+import { ConfigProvider } from 'antd';
 import { FC } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import RequiredAuth from './components/shared/RequiredAuth/RequiredAuth';
@@ -51,7 +51,6 @@ const router = createBrowserRouter([
 ]);
 
 const App: FC = () => {
-  const [messageApi, contextHolder] = message.useMessage();
   return (
     <QueryClientProvider client={queryClient}>
       <ContextProvider>
@@ -62,7 +61,6 @@ const App: FC = () => {
             },
           }}
         >
-          {contextHolder}
           <RouterProvider router={router} />
         </ConfigProvider>
       </ContextProvider>

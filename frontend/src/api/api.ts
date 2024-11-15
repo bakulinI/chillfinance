@@ -64,8 +64,8 @@ class Api {
   async getCategories() {
     return api.get<Category[]>('categories/');
   }
-  async updateCategories(data: Category[]) {
-    return api.post<Category[]>('users/updateCategories/', data);
+  async updateCategories(data: {data: Category['id'][]}) {
+    return api.post<Category['id'][]>('users/updateCategories/', data);
   }
   async getEntertainment() {
     return api.get<Entertainment[]>('entertainment/');
