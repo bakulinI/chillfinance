@@ -5,5 +5,5 @@ interface LayoutProps {
 }
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
-  return <main className="h-screen bg-auth bg-cover bg-center bg-repeat">{children}</main>;
+  return <main className="bg-auth min-h-screen bg-cover bg-center bg-repeat">{children}</main>;
 };

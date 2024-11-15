@@ -24,14 +24,18 @@ class UserListSerializer(serializers.ModelSerializer):
 
         return user
 
+    categories = serializers.SlugRelatedField(
+        queryset=Category.objects.all(), many=True, slug_field="name"
+    )
+    
     class Meta:
         model = CustomUser
         fields = [
             "id",
             "username",
             "role",
-            "password",
             "email",
+            "categories"
         ]
 class BankSerializer(serializers.ModelSerializer):
     class Meta:

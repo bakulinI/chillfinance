@@ -10,14 +10,14 @@
     "model": "chillfinance.category",
     "pk": 2,
     "fields": {
-      "name": "Развлечения"
+      "name": "Квесты"
     }
   },
   {
     "model": "chillfinance.category",
     "pk": 3,
     "fields": {
-      "name": "Транспорт"
+      "name": "Кино"
     }
   },
   {
@@ -31,7 +31,7 @@
     "model": "chillfinance.category",
     "pk": 5,
     "fields": {
-      "name": "Шопинг"
+      "name": "Концерты"
     }
   }
 ]

@@ -12,6 +12,17 @@ class Role(models.Model):
         verbose_name = 'Роль'
         verbose_name_plural = 'Роли'
 
+class Category(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Название категории', unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+
 class CustomUser(AbstractUser):
     username = models.CharField(verbose_name='Имя пользователя', max_length=150,null=False, unique=True)
     email = models.EmailField(unique=True,null=True,default=None,blank=True)
@@ -25,7 +36,7 @@ class CustomUser(AbstractUser):
     role = models.ForeignKey(Role, on_delete=models.PROTECT,null=True,default = None, blank = True, verbose_name='Роль')
     photo = models.ImageField(verbose_name='Фото', upload_to='worker_images', null=True, blank=True)
     objects = CustomUserManager()
-
+    categories = models.ManyToManyField(Category, help_text="Категории пользователя",null=True, blank=True)
     USERNAME_FIELD = "username"
 
     def has_perm(self, perm, obj=None):
@@ -52,10 +63,10 @@ class Bank(models.Model):
         return self.name
 
 class BankAccount(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='bank_accounts', default=None, null=True, blank=True)
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name='user_accounts')
     is_auth = models.BooleanField(default=False)  # Флаг авторизации пользователя в данном банке
     account_number = models.CharField(max_length=20, blank=True)
+    
     def __str__(self):
         return f"{self.user.username} - {self.bank.name}"
 
@@ -66,15 +77,7 @@ class Balance(models.Model):
     def __str__(self):
         return f"{self.user_bank_account.user.username}"
 
-class Category(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Название категории', unique=True)
 
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
 
 
 class Entertainment(models.Model):

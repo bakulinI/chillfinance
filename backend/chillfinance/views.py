@@ -18,6 +18,7 @@ from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExampl
 from drf_spectacular.types import OpenApiTypes
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from rest_framework.decorators import action
 
 def home(request):
     users = CustomUser.objects.all()
@@ -242,6 +243,42 @@ class UserViewSet(ModelViewSet):
     queryset = CustomUser.objects.all()
     permission_classes = [IsAuthenticated]
     serializer_class = UserListSerializer
+
+        
+    @swagger_auto_schema(
+        
+        responses={ 200: openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    'user': openapi.Schema(type=openapi.TYPE_OBJECT),
+                }
+            ), 
+            },
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'data': openapi.Schema(type=openapi.TYPE_ARRAY,items=openapi.Items(type=openapi.Schema(type=openapi.TYPE_OBJECT,properties={"id":openapi.Schema(type=openapi.TYPE_NUMBER)})),description='Массив категорий.'),
+               
+            },
+        ),
+        operation_description="Обновление категорий пользователя."
+    )
+    @action(methods=["POST"], detail=False)
+    def updateCategories(self, request, **kwargs):
+      
+        user = request.user
+        categories = request.data.get("data", [])
+
+        user.categories.set(categories)
+        user.save()
+        return Response(UserListSerializer(user).data)
+    
+    @action(methods=["GET"], detail=False)
+    def me(self, request, **kwargs):
+      
+        user = request.user
+        return Response(UserListSerializer(user).data)
+    
 class BankAccountViewSet(ModelViewSet):
     queryset = BankAccount.objects.all()
     permission_classes = [IsAuthenticated]

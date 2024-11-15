@@ -1,3 +1,4 @@
+import { Category, Entertainment, User } from '@/common/types';
 import { AccesTokenResponse, SignInParams, SignUpParams } from '@/types';
 import axios from 'axios';
 
@@ -53,24 +54,18 @@ class AuthApi {
   }
 }
 
-interface Category {
-  id: number;
-  name: string;
-}
-
-interface Entertainment {
-  id: number;
-  title: string;
-  description: string;
-  categories: Category[];
-}
-
 class Api {
+  async getMe() {
+    return api.get<User>('users/me/');
+  }
   async getBanks() {
     return api.get('banks/');
   }
   async getCategories() {
     return api.get<Category[]>('categories/');
+  }
+  async updateCategories(data: Category[]) {
+    return api.post<Category[]>('users/updateCategories/', data);
   }
   async getEntertainment() {
     return api.get<Entertainment[]>('entertainment/');

@@ -1,18 +1,11 @@
-import { api } from '@/api';
 import { Button, Flex, Typography } from 'antd';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 const { Title } = Typography;
 export const Home: FC = () => {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
-  useEffect(() => {
-    const getData = async () => {
-      const response = await api.get('/users/');
-      console.log(response.data);
-    };
-    getData();
-  }, []);
+
   return (
     <div className="my-container">
       <Title className="text-white text-center pt-4" level={1}>
