@@ -72,11 +72,9 @@ class RegistrationAPIView(APIView):
     value=str(refresh),
     expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
     max_age=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds(), 
-
+    samesite="None",
     secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
     httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
-    samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
-
     )
             response.data = {
             'access_token': str(refresh.access_token),
@@ -140,11 +138,9 @@ class LoginAPIView(APIView):
     value=str(refresh),
     expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
     max_age=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds(), 
-
+    samesite="None",
     secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
     httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
-    samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
-   
     )
         
         refresh.payload.update({
@@ -228,11 +224,9 @@ class RefreshTokenView(APIView):
     value=data["refresh"],
     expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
     max_age=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds(), 
-
+    samesite="None",
     secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
     httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
-    samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
-   
     )
         response.data = {
             'access_token': str(refresh.access_token),
