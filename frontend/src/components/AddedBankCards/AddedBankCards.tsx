@@ -34,6 +34,7 @@ export const AddedBankCards: FC<Props> = ({ name, image_url }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   return (
     <>
       <Card

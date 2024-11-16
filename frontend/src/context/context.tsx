@@ -2,13 +2,13 @@ import React, { createContext, FC, useEffect, useMemo, useState } from 'react';
 
 import { authApi } from '@/api';
 import { ME, useGetMe, useLocalStorage } from '@/common';
-import { useQueryClient } from '@tanstack/react-query';
 import { User } from '@/common/types';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface Context {
   auth: boolean;
   setAuth: React.Dispatch<React.SetStateAction<boolean>>;
-  user: User
+  user: User;
 }
 
 export const context = createContext<Context>({} as Context);
@@ -20,10 +20,10 @@ interface ContextProviderProps {
 export const ContextProvider: FC<ContextProviderProps> = ({ children }) => {
   const [auth, setAuth] = useState(false);
 
-  const {  data } = useGetMe();
+  const { data } = useGetMe();
   const queryClient = useQueryClient();
   const user = useMemo(() => {
-    return data;
+    return data || ({ username: 'test', categories: [] } as User);
   }, [data]);
   const { getItem, setItem } = useLocalStorage();
   const refreshToken = async () => {
